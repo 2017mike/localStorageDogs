@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <input id="dogInput" type="text">
+  <button id="addDog">Add Dog</button>
+  <div id="dogs"></div>
+
+  <script>
+
+
+    let dogs = JSON.parse(localStorage.getItem('dogs')) || []
+
+    function showDogs() {
+      for (let index = 0; index < dogs.length; index++) {
+        let dog = dogs[index]
+        console.log(dog)
+        document.getElementById('dogs').innerHTML += `
+        <h2> ${dog} </h2>
+        `
+      }
+    }
+
+    showDogs()
+
+    document.getElementById('addDog').addEventListener('click', event => {
+      event.preventDefault()
+      const newDog = document.getElementById('dogInput').value
+      dogs.unshift(newDog)
+      localStorage.setItem('dogs', JSON.stringify(dogs))
+      document.getElementById('dogs').innerHTML += `
+        <h2> ${newDog} </h2>
+        `
+    })
+
+
+
+
+
+  </script>
+</body>
+
+</html>
